@@ -27,5 +27,10 @@ namespace CreationObjet
         {
             return this.montant;
         }
+
+        public decimal calculTTC()
+        {
+            return montant * 1.196M * quantite;
+        }
     }
 }

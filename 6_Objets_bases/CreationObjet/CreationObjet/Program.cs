@@ -29,6 +29,18 @@ namespace CreationObjet
             {
                 Console.WriteLine("Produits différents");
             }
+
+            // --------------------------------------------
+
+            produit.quantite = 10;
+            produit.setMontant(15);
+
+            Console.WriteLine("Montant TTC produit 1 : " + produit.calculTTC());
+
+            produit2.quantite = 5;
+            produit2.setMontant(10);
+
+            Console.WriteLine("Montant TTC produit 2 : " + produit2.calculTTC());
         }
     }
 }

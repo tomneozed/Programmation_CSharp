@@ -10,7 +10,14 @@ namespace InstructionBreak
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Worlde!");
+            for (int i = 0; i < 101; i++)
+            {
+                Console.WriteLine(i);
+                if (i == 25)
+                {
+                    break;
+                }
+            }
         }
     }
 }

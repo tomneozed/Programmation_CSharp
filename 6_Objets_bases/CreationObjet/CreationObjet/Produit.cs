@@ -28,9 +28,46 @@ namespace CreationObjet
             return this.montant;
         }
 
-        public decimal calculTTC()
+        public Produit()
+        {
+
+        }
+
+        public Produit(string nom) : this(nom, 0M)
+        {
+            
+        }
+
+        public Produit(string nom, decimal montant): this(nom, montant, 0)
+        {
+
+        }
+
+        public Produit(string nom, decimal montant, uint quantite)
+        {
+            this.nom = nom;
+            this.montant = montant;
+            this.quantite = quantite;
+        }
+
+        public decimal CalculTTC()
         {
             return montant * 1.196M * quantite;
+        }
+
+        public decimal CalculPromotion(int pourcentageReduction)
+        {
+            return CalculTTC() * (1 - pourcentageReduction / 100M);
+        }
+
+        public decimal CalculPromotion(string fournisseur, decimal montant)
+        {
+            return CalculPromotion(montant);
+        }
+
+        public decimal CalculPromotion(decimal montant)
+        {
+            return CalculTTC() - montant;
         }
     }
 }

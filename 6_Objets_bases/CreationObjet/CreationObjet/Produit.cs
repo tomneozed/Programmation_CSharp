@@ -10,7 +10,7 @@ namespace CreationObjet
     {
         public string nom; //nom du produit
         public uint quantite; // quantité superieure a 0
-        decimal montant; // montant superieur a 0
+        private decimal montant; // montant superieur a 0
 
         public void setMontant(decimal montant)
         {

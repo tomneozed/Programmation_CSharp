@@ -18,6 +18,17 @@ namespace CreationObjet
             Console.WriteLine(produit.nom);
             Console.WriteLine(produit.quantite);
             Console.WriteLine(produit.getMontant());
+
+            Produit produit2 = new Produit();
+            produit2.nom = "Voyage";
+            // produit2 = produit;
+            if (produit == produit2)
+            {
+                Console.WriteLine("produits identiques");
+            } else
+            {
+                Console.WriteLine("Produits différents");
+            }
         }
     }
 }

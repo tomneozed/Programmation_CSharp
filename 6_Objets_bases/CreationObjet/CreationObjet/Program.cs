@@ -64,6 +64,25 @@ namespace CreationObjet
             Console.WriteLine(produit5.nom);
             Console.WriteLine(produit5.getMontant());
             Console.WriteLine(produit5.quantite);
+
+            // --------------------------------------------
+
+            Voyage voyage1 = new Voyage();
+            Voyage voyage2 = new Voyage("Voyage 2");
+            Voyage voyage3 = new Voyage("Voyage 3", 5);
+
+            Console.WriteLine(voyage1.nom);
+            Console.WriteLine(voyage1.getMontant());
+            Console.WriteLine(voyage1.quantite);
+
+            Console.WriteLine(voyage2.nom);
+            Console.WriteLine(voyage2.getMontant());
+            Console.WriteLine(voyage2.quantite);
+
+            Console.WriteLine(voyage3.nom);
+            Console.WriteLine(voyage3.getMontant());
+            Console.WriteLine(voyage3.quantite);
+
         }
     }
 }

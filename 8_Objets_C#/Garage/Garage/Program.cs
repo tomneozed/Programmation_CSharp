@@ -64,23 +64,26 @@ namespace Garage
             vehicule.Roule();
 */
             // -----------------------------------------------------------
+            /*
+                        Voiture voiture4 = new Voiture("Clio", "Renault", "Verte");
+                        Console.WriteLine("La voiture {0} {1} est de couleur {2}",
+                                       voiture4.Marque,
+                                       voiture4.Modele,
+                                       voiture4.Couleur
+                                   );
+                        voiture4.Couleur = "Bleue";
+                        Console.WriteLine("La voiture {0} {1} est de couleur {2}",
+                                      voiture4.Marque,
+                                      voiture4.Modele,
+                                      voiture4.Couleur
+                                  );
 
-            Voiture voiture4 = new Voiture("Clio", "Renault", "Verte");
-            Console.WriteLine("La voiture {0} {1} est de couleur {2}",
-                           voiture4.Marque,
-                           voiture4.Modele,
-                           voiture4.Couleur
-                       );
-            voiture4.Couleur = "Bleue";
-            Console.WriteLine("La voiture {0} {1} est de couleur {2}",
-                          voiture4.Marque,
-                          voiture4.Modele,
-                          voiture4.Couleur
-                      );
-
-            voiture4.Roule();
-
+                        voiture4.Roule();
+            */
             // -----------------------------------------------------------
+
+            Voiture voiture5 = new Voiture("Clio", "Renault", "Verte");
+            voiture5.Roule();
         }
     }
 }

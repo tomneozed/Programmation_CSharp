@@ -7,17 +7,27 @@ using System.Threading.Tasks;
 
 namespace Garage
 {
-    internal class Voiture
+    internal class Voiture : Vehicule
     {
-        public string Modele {  get; set; }
-        public string Marque {  get; set; }
-        public string Couleur {  get; set; }
+        public string modele;
 
-        public Voiture() { }
         public Voiture(string modele, string marque, string couleur) {
-            this.Modele = modele;
+            this.modele = modele;
             this.Marque = marque;
             this.Couleur = couleur;
+        }
+
+        public string Modele
+        {
+            get
+            {
+                return modele;
+            }
+
+            set
+            {
+                this.modele = value;
+            }
         }
 
         public void Roule() {

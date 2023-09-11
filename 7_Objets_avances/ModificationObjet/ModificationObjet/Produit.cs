@@ -53,7 +53,7 @@ namespace ModificationObjet
             this.Quantite = quantite;
         }
 
-        public decimal CalculTTC()
+        public virtual decimal CalculTTC()
         {
             return Montant * 1.196M * Quantite;
         }

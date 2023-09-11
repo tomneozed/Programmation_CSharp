@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModificationObjet
 {
-    internal class Produit
+    abstract class Produit
     {
         private string Nom; //nom du produit
         public uint Quantite; // quantité superieure a 0
@@ -53,10 +53,7 @@ namespace ModificationObjet
             this.Quantite = quantite;
         }
 
-        public virtual decimal CalculTTC()
-        {
-            return Montant * 1.196M * Quantite;
-        }
+        public abstract decimal CalculTTC();
 
         public decimal CalculPromotion(int pourcentageReduction)
         {

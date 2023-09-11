@@ -17,10 +17,9 @@ namespace ModificationObjet
 
         public Voyage(decimal montant, uint quantite, decimal pourcentage) : base("Voyage ", montant, quantite) { Pourcentage = pourcentage; }
 
-        public new string CalculTTC()
+        public override decimal CalculTTC()
         {
-            decimal calcul = Montant * (1 + Pourcentage / 100) * Quantite;
-            return String.Format("Le montant TTC est de : {0:c}", calcul);
+            return Montant * (1 + Pourcentage / 100) * Quantite;
         }
     }
 }

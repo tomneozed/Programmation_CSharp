@@ -25,6 +25,24 @@ namespace ModificationObjet
                 voyage.CalculTTC(), 
                 voyage.Pourcentage);
 
+            // ---------------------------------------------------------------------------------------------
+
+            Produit produit = new Produit("Voyage");
+            produit.Quantite = 1;
+            produit.Montant = 1000;
+            Console.WriteLine("Le produit Voyage coute {0:c} HT. Montant TTC pour {1} : {2:c}", 
+                produit.Montant, 
+                produit.Quantite, 
+                produit.CalculTTC());
+
+            Voyage voyage2 = new Voyage(350.00M); 
+            Console.WriteLine("Le produit Voyage coute {0} HT. pour {1} : {2} (TVA {3}%)", 
+                voyage2.Montant, 
+                voyage2.Quantite, 
+                voyage2.CalculTTC(), 
+                voyage2.Pourcentage);
+
+
         }
     }
 }

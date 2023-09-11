@@ -30,7 +30,7 @@ namespace Garage
             }
         }
 
-        public void Roule() {
+        public override void Roule() {
             Console.WriteLine("La voiture roule !");
         }
 

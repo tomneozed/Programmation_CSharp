@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage
 {
-    internal class Vehicule
+    abstract class Vehicule
     {
         private string marque;
         private string couleur;
@@ -45,10 +45,7 @@ namespace Garage
             }
         }
 
-        public void Roule()
-        {
-            Console.WriteLine("Le véhicule roule !");
-        }
+        public abstract void Roule();
 
     }
 }

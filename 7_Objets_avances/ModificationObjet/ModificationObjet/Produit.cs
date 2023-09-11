@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ModificationObjet
 {
-    abstract class Produit
+    abstract class Produit : IProduit
     {
-        private string Nom; //nom du produit
+        string IProduit.Nom { get; set; }
         public uint Quantite; // quantité superieure a 0
         public decimal Montant; // montant superieur a 0
+
 
         public void setMontant(decimal montant)
         {

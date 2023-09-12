@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -15,20 +16,35 @@ namespace DelegueSimple
     {
         static void Main(string[] args)
         {
-/*
-            DebutFacture();
-            FinFacture();
-            SimpleDelegue Info = new SimpleDelegue(DebutFacture);
-            Info();
+            /*
+                        DebutFacture();
+                        FinFacture();
+                        SimpleDelegue Info = new SimpleDelegue(DebutFacture);
+                        Info();
 
-            Info = FinFacture;
-            Info();
-*/
+                        Info = FinFacture;
+                        Info();
+            */
+            // --------------------------------------------------------------
+            /*
+                        AfficheMessage messager = new AfficheMessage(Info);
+                        Processus(messager);
+            */
+            // --------------------------------------------------------------
+            /*
+                        SimpleDelegue Info = new SimpleDelegue(DebutFacture);
+                        Info += FinFacture;
+                        Info();
+            */
             // --------------------------------------------------------------
 
-            AfficheMessage messager = new AfficheMessage(Info);
-            Processus(messager);
+            FichierDeLog FichierSortie = new FichierDeLog("C:\\FichierLogs.txt");
+            AfficheMessage mInfo = new AfficheMessage(Info);
 
+            mInfo += FichierSortie.Info;
+            Processus(mInfo);
+
+            FichierSortie.Ferme();
         }
 
         public static void DebutFacture()
@@ -57,5 +73,27 @@ namespace DelegueSimple
             }
         }
 
+        public class FichierDeLog
+        {
+            FileStream fs;
+            StreamWriter sw;
+
+            public FichierDeLog(string fichier)
+            {
+                fs = new FileStream(fichier, FileMode.Create);
+                sw = new StreamWriter(fs);
+            }
+
+            public void Info(string s)
+            {
+                sw.WriteLine(s);
+            }
+
+            public void Ferme()
+            {
+                sw.Close();
+                fs.Close();
+            }
+        }
     }
 }

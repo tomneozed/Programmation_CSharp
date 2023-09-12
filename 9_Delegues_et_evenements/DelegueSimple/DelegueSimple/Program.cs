@@ -75,17 +75,32 @@ namespace DelegueSimple
                         Console.WriteLine("Toutes les factures sont terminées");
             */
             // --------------------------------------------------------------
+            /*
+                        MonCompteur compteur = new MonCompteur(10);
+                        compteur.TravailTermine += new ChangementEtat(Delegue_TravailTermine);
 
-            MonCompteur compteur = new MonCompteur(10);
-            compteur.TravailTermine += new ChangementEtat(Delegue_TravailTermine);
-
-            for (int i = 0; i < 20; i++)
-            {
-                compteur.Incrementation();
-            }
-            Console.WriteLine(compteur.Increment);
-
+                        for (int i = 0; i < 20; i++)
+                        {
+                            compteur.Incrementation();
+                        }
+                        Console.WriteLine(compteur.Increment);
+            */
             // --------------------------------------------------------------
+
+            ThreadAvecParametre ta = new ThreadAvecParametre(20);
+            ta.callback += new ExempleCallback(MethodeCallBack);
+
+            Thread tache = new Thread(new ThreadStart(ta.TacheParallele));
+            tache.Start();
+
+            for (int i = 30; i > 1; i--)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Toutes les factures sont terminées");
+
         }
 
         public static void DebutFacture()
@@ -146,11 +161,10 @@ namespace DelegueSimple
         class ThreadAvecParametre
         {
             int secondes;
-            ExempleCallback callback;
-            public ThreadAvecParametre(int s, ExempleCallback callback)
+            public event ExempleCallback callback;
+            public ThreadAvecParametre(int s)
             {
                 this.secondes = s;
-                this.callback = callback;
             }
 
             public void TacheParallele()

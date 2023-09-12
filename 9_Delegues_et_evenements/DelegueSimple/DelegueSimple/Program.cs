@@ -16,6 +16,8 @@ namespace DelegueSimple
 
     public delegate void ExempleCallback();
 
+    public delegate void ChangementEtat();
+
     internal class Program
     {
         static void Main(string[] args)
@@ -60,17 +62,30 @@ namespace DelegueSimple
 
                         thread.TacheParallele();
             */
-            ThreadAvecParametre ta = new ThreadAvecParametre(20, new ExempleCallback(MethodeCallBack));
-            Thread tache = new Thread(new ThreadStart(ta.TacheParallele));
-            tache.Start();
-            for(int i = 30; i > 1; i--)
-            {
-                Thread.Sleep(1000);
-                Console.Write(".");
-            }
-            Console.WriteLine();
-            Console.WriteLine("Toutes les factures sont terminées");
+            /*
+                        ThreadAvecParametre ta = new ThreadAvecParametre(20, new ExempleCallback(MethodeCallBack));
+                        Thread tache = new Thread(new ThreadStart(ta.TacheParallele));
+                        tache.Start();
+                        for(int i = 30; i > 1; i--)
+                        {
+                            Thread.Sleep(1000);
+                            Console.Write(".");
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Toutes les factures sont terminées");
+            */
+            // --------------------------------------------------------------
 
+            MonCompteur compteur = new MonCompteur(10);
+            compteur.TravailTermine += new ChangementEtat(Delegue_TravailTermine);
+
+            for (int i = 0; i < 20; i++)
+            {
+                compteur.Incrementation();
+            }
+            Console.WriteLine(compteur.Increment);
+
+            // --------------------------------------------------------------
         }
 
         public static void DebutFacture()
@@ -147,7 +162,7 @@ namespace DelegueSimple
                     Console.WriteLine();
                     Console.WriteLine("Facturation en cours");
                 }
-                if(this.callback != null)
+                if (this.callback != null)
                 {
                     callback();
                 }
@@ -159,6 +174,43 @@ namespace DelegueSimple
             Console.WriteLine("Facture terminée");
         }
 
+        public class MonCompteur
+        {
+            private int compteur;
 
+            public MonCompteur(int c)
+            {
+                this.compteur = c;
+            }
+
+            public event ChangementEtat TravailTermine;
+            private int increment;
+
+            public int Increment
+            {
+                get { return increment; }
+                set 
+                { 
+                    increment = value;
+                    if(increment == compteur)
+                    {
+                        if (TravailTermine != null)
+                        {
+                            TravailTermine();
+                        }
+                    }
+                }
+            }
+
+            public void Incrementation()
+            {
+                Increment++;
+            }
+        }
+
+        static void Delegue_TravailTermine()
+        {
+            Console.WriteLine("Le compteur a atteint la valeur cible");
+        }
     }
 }

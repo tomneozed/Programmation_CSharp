@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DelegueSimple
@@ -11,6 +13,8 @@ namespace DelegueSimple
     public delegate void SimpleDelegue();
 
     public delegate void AfficheMessage(string message);
+
+    public delegate void ExempleCallback();
 
     internal class Program
     {
@@ -37,14 +41,36 @@ namespace DelegueSimple
                         Info();
             */
             // --------------------------------------------------------------
+            /*
+                        FichierDeLog FichierSortie = new FichierDeLog("C:\\FichierLogs.txt");
+                        AfficheMessage mInfo = new AfficheMessage(Info);
 
-            FichierDeLog FichierSortie = new FichierDeLog("C:\\FichierLogs.txt");
-            AfficheMessage mInfo = new AfficheMessage(Info);
+                        mInfo += FichierSortie.Info;
+                        Processus(mInfo);
 
-            mInfo += FichierSortie.Info;
-            Processus(mInfo);
+                        FichierSortie.Ferme();
+            */
+            // --------------------------------------------------------------
+            /*
+                        ThreadStart tacheDelegue = new ThreadStart(UneTache);
+                        Thread tache = new Thread(tacheDelegue);
+                        tache.Start();
 
-            FichierSortie.Ferme();
+                        ThreadAvecParametre thread = new ThreadAvecParametre(5);
+
+                        thread.TacheParallele();
+            */
+            ThreadAvecParametre ta = new ThreadAvecParametre(20, new ExempleCallback(MethodeCallBack));
+            Thread tache = new Thread(new ThreadStart(ta.TacheParallele));
+            tache.Start();
+            for(int i = 30; i > 1; i--)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Toutes les factures sont terminées");
+
         }
 
         public static void DebutFacture()
@@ -62,7 +88,8 @@ namespace DelegueSimple
             Console.WriteLine(message);
         }
 
-        public static void Processus(AfficheMessage Affichage) {
+        public static void Processus(AfficheMessage Affichage)
+        {
             if (Affichage != null)
             {
                 Affichage("Début de la facturation");
@@ -95,5 +122,43 @@ namespace DelegueSimple
                 fs.Close();
             }
         }
+
+        static void UneTache()
+        {
+            Console.WriteLine("Facturation en cours");
+        }
+
+        class ThreadAvecParametre
+        {
+            int secondes;
+            ExempleCallback callback;
+            public ThreadAvecParametre(int s, ExempleCallback callback)
+            {
+                this.secondes = s;
+                this.callback = callback;
+            }
+
+            public void TacheParallele()
+            {
+                Console.WriteLine("Debut de la Facturation");
+                for (int i = 0; i < 5; i++)
+                {
+                    Thread.Sleep(this.secondes / 5 * 1000);
+                    Console.WriteLine();
+                    Console.WriteLine("Facturation en cours");
+                }
+                if(this.callback != null)
+                {
+                    callback();
+                }
+            }
+        }
+
+        public static void MethodeCallBack()
+        {
+            Console.WriteLine("Facture terminée");
+        }
+
+
     }
 }
